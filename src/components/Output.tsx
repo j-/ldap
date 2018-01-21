@@ -10,11 +10,11 @@ export default class Output extends React.Component<Props> {
 		const { input } = this.props;
 		const parts = input.split(/,/g);
 		const children = parts.map((part, i) => {
-			const [name, value] = part.split('=');
+			const [attribute, value] = part.split('=');
 			const isLast = i === parts.length - 1;
 			return (
 				<div className="Output-part" key={i}>
-					<OutputPart name={name} value={value} />
+					<OutputPart attribute={attribute} value={value} />
 					{isLast ? '' : ','}
 				</div>
 			);
