@@ -1,5 +1,5 @@
 import * as React from 'react';
-import OutputPart from './OutputPart';
+import RelativeDistinguishedName from './RelativeDistinguishedName';
 
 export interface Props {
 	input: string;
@@ -14,7 +14,10 @@ export default class Output extends React.Component<Props> {
 			const isLast = i === parts.length - 1;
 			return (
 				<div className="Output-part" key={i}>
-					<OutputPart attribute={attribute} value={value} />
+					<RelativeDistinguishedName
+						attribute={attribute}
+						value={value}
+					/>
 					{isLast ? '' : ','}
 				</div>
 			);
