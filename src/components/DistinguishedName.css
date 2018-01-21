@@ -1,0 +1,3 @@
+.DistinguishedName > .DistinguishedName-rdn > .DistinguishedName-comma {
+	opacity: 0.5;
+}

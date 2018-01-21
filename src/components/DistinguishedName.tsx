@@ -1,6 +1,7 @@
 import * as React from 'react';
 import RelativeDistinguishedName from './RelativeDistinguishedName';
 import { parseDN } from '../dn';
+import './DistinguishedName.css';
 
 export interface Props {
 	dn: string;

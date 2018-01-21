@@ -2,3 +2,7 @@
 	cursor: help;
 	border-bottom: 1px dotted #888;
 }
+
+.RelativeDistinguishedName > .RelativeDistinguishedName-equals {
+	opacity: 0.5;
+}

@@ -12,7 +12,8 @@ export default class RelativeDistinguishedName extends React.Component<Props> {
 		const { attribute, value } = this.props;
 		return (
 			<span className="RelativeDistinguishedName">
-				<strong className="RelativeDistinguishedName-attribute" title={getTypeLabel(attribute)}>{attribute}</strong>=
+				<strong className="RelativeDistinguishedName-attribute" title={getTypeLabel(attribute)}>{attribute}</strong>
+				<span className="RelativeDistinguishedName-equals">=</span>
 				<span className="RelativeDistinguishedName-value">{value}</span>
 			</span>
 		);
