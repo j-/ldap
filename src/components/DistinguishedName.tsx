@@ -2,18 +2,18 @@ import * as React from 'react';
 import RelativeDistinguishedName from './RelativeDistinguishedName';
 
 export interface Props {
-	input: string;
+	dn: string;
 }
 
-export default class Output extends React.Component<Props> {
+export default class DistinguishedName extends React.Component<Props> {
 	render () {
-		const { input } = this.props;
-		const parts = input.split(/,/g);
-		const children = parts.map((part, i) => {
-			const [attribute, value] = part.split('=');
+		const { dn } = this.props;
+		const parts = dn.split(/,/g);
+		const rdns = parts.map((rdn, i) => {
+			const [attribute, value] = rdn.split('=');
 			const isLast = i === parts.length - 1;
 			return (
-				<div className="Output-part" key={i}>
+				<div className="DistinguishedName-rdn" key={i}>
 					<RelativeDistinguishedName
 						attribute={attribute}
 						value={value}
@@ -23,8 +23,8 @@ export default class Output extends React.Component<Props> {
 			);
 		});
 		return (
-			<div className="Output">
-				{children}
+			<div className="DistinguishedName">
+				{rdns}
 			</div>
 		);
 	}
