@@ -19,7 +19,7 @@ export default class DistinguishedName extends React.Component<Props> {
 						attribute={attribute}
 						value={value}
 					/>
-					{isLast ? '' : ','}
+					{!isLast && <span className="DistinguishedName-comma">,</span>}
 				</div>
 			);
 		});
