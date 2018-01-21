@@ -13,19 +13,14 @@ export const parseDN = (dn: string): string[][] => {
 			positions.push(match.index);
 		}
 	}
+	positions.push(dn.length);
+	let lastIndex = -1;
 	for (let i = 0; i < positions.length; i++) {
-		const startIndex = (positions[i - 1] || -1) + 1;
-		const endIndex = positions[i];
-		const substring = dn.substring(startIndex, endIndex);
-		const rdn = parseRDN(substring);
-		results.push(rdn);
-	}
-	const startIndex = (positions.pop() || -1) + 1;
-	const endIndex = dn.length;
-	if (startIndex !== endIndex) {
-		const substring = dn.substring(startIndex, endIndex);
-		const rdn = parseRDN(substring);
-		results.push(rdn);
+		const substring = dn.substring(lastIndex + 1, positions[i]);
+		if (substring) {
+			results.push(parseRDN(substring));
+		}
+		lastIndex = positions[i];
 	}
 	return results;
 };
