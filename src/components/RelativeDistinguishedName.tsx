@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { getTypeLabel } from '../types';
+import './RelativeDistinguishedName.css';
 
 export interface Props {
 	attribute: string;
