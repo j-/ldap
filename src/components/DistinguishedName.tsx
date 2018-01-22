@@ -7,17 +7,61 @@ export interface Props {
 	dn: string;
 }
 
-export default class DistinguishedName extends React.Component<Props> {
-	render () {
-		return (
-			<div className="DistinguishedName">
-				{this.renderRdns()}
-			</div>
-		);
+interface State {
+	parsedDn: string[][] | null;
+	error: Error | null;
+}
+
+export default class DistinguishedName extends React.Component<Props, State> {
+	state: State = {
+		parsedDn: null,
+		error: null,
+	};
+
+	componentWillMount () {
+		this.parseDn(this.props);
 	}
 
-	private renderRdns () {
-		return parseDn(this.props.dn).map(([attribute, value], i, { length }) => (
+	componentWillReceiveProps (props: Props) {
+		this.parseDn(props);
+	}
+
+	render () {
+		const { error, parsedDn } = this.state;
+		if (error) {
+			return (
+				<div className="DistinguishedName DistinguishedName--has-error">
+					<p>Error parsing distinguished name</p>
+					<p>{error.message}</p>
+				</div>
+			);
+		} else if (parsedDn) {
+			return (
+				<div className="DistinguishedName">
+					{this.renderRdns(parsedDn)}
+				</div>
+			);
+		} else {
+			return null;
+		}
+	}
+
+	private parseDn (props: Props) {
+		try {
+			this.setState({
+				error: null,
+				parsedDn: parseDn(props.dn),
+			});
+		} catch (err) {
+			this.setState({
+				error: err,
+				parsedDn: null,
+			});
+		}
+	}
+
+	private renderRdns (dn: string[][]) {
+		return dn.map(([attribute, value], i, { length }) => (
 			<div className="DistinguishedName-rdn" key={i}>
 				<RelativeDistinguishedName
 					attribute={attribute}
