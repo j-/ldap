@@ -11,9 +11,11 @@ const getDN = (search: string) => {
 const RouteResults = ({ location }: RouteProps) => (
 	<div className="RouteResults">
 		<h2>Results</h2>
+		<br />
 		<DistinguishedName dn={getDN(location ? location.search : '')} />
-
+		<br />
 		<h2>Parse another distinguished name</h2>
+		<br />
 		<InputForm />
 	</div>
 );
