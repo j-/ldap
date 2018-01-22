@@ -12,10 +12,12 @@ export const parseRdn = (rdn: string): string[] => {
 	if (!rdn) {
 		return [];
 	}
-	const [attribute, value] = rdn.split('=');
-	if (!value) {
+	const lastIndex = rdn.lastIndexOf('=');
+	if (lastIndex < 0) {
 		throw new SyntaxError('Expected an attribute assignment, none found');
 	}
+	const attribute = rdn.substring(0, lastIndex);
+	const value = rdn.substring(lastIndex + 1);
 	return [attribute, parseRdnValue(value)];
 };
 
