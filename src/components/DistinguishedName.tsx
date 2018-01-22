@@ -9,25 +9,22 @@ export interface Props {
 
 export default class DistinguishedName extends React.Component<Props> {
 	render () {
-		const { dn } = this.props;
-		const parts = parseDn(dn);
-		const rdns = parts.map((rdn, i) => {
-			const [attribute, value] = rdn;
-			const isLast = i === parts.length - 1;
-			return (
-				<div className="DistinguishedName-rdn" key={i}>
-					<RelativeDistinguishedName
-						attribute={attribute}
-						value={value}
-					/>
-					{!isLast && <span className="DistinguishedName-comma">,</span>}
-				</div>
-			);
-		});
 		return (
 			<div className="DistinguishedName">
-				{rdns}
+				{this.renderRdns()}
 			</div>
 		);
+	}
+
+	private renderRdns () {
+		return parseDn(this.props.dn).map(([attribute, value], i, { length }) => (
+			<div className="DistinguishedName-rdn" key={i}>
+				<RelativeDistinguishedName
+					attribute={attribute}
+					value={value}
+				/>
+				{i < length - 1 && <span className="DistinguishedName-comma">,</span>}
+			</div>
+		));
 	}
 }
