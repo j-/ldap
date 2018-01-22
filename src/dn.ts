@@ -1,12 +1,22 @@
+export const parseRDNValue = (value: string): string => {
+	return value
+		.replace(/\\[0-9a-fA-F]{2}/g, (val) => {
+			return String.fromCharCode(
+				parseInt(val.substring(1), 16)
+			);
+		})
+		.replace(/\\/g, '');
+};
+
 export const parseRDN = (rdn: string): string[] => {
 	const [attribute, value] = rdn.split('=');
-	return [attribute, value.replace(/\\/g, '')];
+	return [attribute, parseRDNValue(value)];
 };
 
 export const parseDN = (dn: string): string[][] => {
 	const positions: number[] = [];
 	const results: string[][] = [];
-	const exp = /\\.|(,)/g;
+	const exp = /\\[0-9a-fA-F]{2}|\\.|(,)/g;
 	let match: RegExpExecArray | null;
 	while (match = exp.exec(dn)) {
 		if (match[1]) {

@@ -37,7 +37,7 @@ it('handles escaped commas', () => {
 	]);
 });
 
-xit('escapes hex characters', () => {
+it('escapes hex characters', () => {
 	// From https://msdn.microsoft.com/en-us/library/aa366101(v=vs.85).aspx
 	const result = parseDN('CN=Before\\0DAfter,OU=Test,DC=North America,DC=Fabrikam,DC=COM');
 	expect(result).toEqual([
