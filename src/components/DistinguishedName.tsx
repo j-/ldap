@@ -1,6 +1,6 @@
 import * as React from 'react';
 import RelativeDistinguishedName from './RelativeDistinguishedName';
-import { parseDN } from '../dn';
+import { parseDn } from '../dn';
 import './DistinguishedName.css';
 
 export interface Props {
@@ -10,7 +10,7 @@ export interface Props {
 export default class DistinguishedName extends React.Component<Props> {
 	render () {
 		const { dn } = this.props;
-		const parts = parseDN(dn);
+		const parts = parseDn(dn);
 		const rdns = parts.map((rdn, i) => {
 			const [attribute, value] = rdn;
 			const isLast = i === parts.length - 1;

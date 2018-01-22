@@ -1,4 +1,4 @@
-export const parseRDNValue = (value: string): string => {
+export const parseRdnValue = (value: string): string => {
 	return value
 		.replace(/\\[0-9a-fA-F]{2}/g, (val) => {
 			return String.fromCharCode(
@@ -8,12 +8,12 @@ export const parseRDNValue = (value: string): string => {
 		.replace(/\\/g, '');
 };
 
-export const parseRDN = (rdn: string): string[] => {
+export const parseRdn = (rdn: string): string[] => {
 	const [attribute, value] = rdn.split('=');
-	return [attribute, parseRDNValue(value)];
+	return [attribute, parseRdnValue(value)];
 };
 
-export const parseDN = (dn: string): string[][] => {
+export const parseDn = (dn: string): string[][] => {
 	const positions: number[] = [];
 	const results: string[][] = [];
 	const exp = /\\[0-9a-fA-F]{2}|\\.|(,)/g;
@@ -28,7 +28,7 @@ export const parseDN = (dn: string): string[][] => {
 	for (let i = 0; i < positions.length; i++) {
 		const substring = dn.substring(lastIndex + 1, positions[i]);
 		if (substring) {
-			results.push(parseRDN(substring));
+			results.push(parseRdn(substring));
 		}
 		lastIndex = positions[i];
 	}
