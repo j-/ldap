@@ -35,6 +35,12 @@ export default class DistinguishedName extends React.Component<Props, State> {
 					<p>{error.message}</p>
 				</div>
 			);
+		} else if (parsedDn && !parsedDn.length) {
+			return (
+				<div className="DistinguishedName DistinguishedName--has-warning">
+					<p>Enter a distinguished name to be parsed</p>
+				</div>
+			);
 		} else if (parsedDn) {
 			return (
 				<div className="DistinguishedName">
