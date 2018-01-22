@@ -22,6 +22,9 @@ export const parseRdn = (rdn: string): string[] => {
 };
 
 export const parseDn = (dn: string): string[][] => {
+	if (!dn) {
+		return [];
+	}
 	const positions: number[] = [];
 	const results: string[][] = [];
 	const exp = /\\[0-9a-fA-F]{2}|\\.|(,)/g;

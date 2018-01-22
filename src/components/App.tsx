@@ -1,13 +1,16 @@
 import * as React from 'react';
-import DistinguishedName from './DistinguishedName';
-
-const INPUT = 'CN=Jamie J Hoeks P761235,OU=Users,OU=Wealth Management,OU=Head' +
-	' Office,OU=Accounts,OU=Production,DC=aur,DC=national,DC=com,DC=au';
+import { HashRouter as Router, Route } from 'react-router-dom';
+import RouteHome from '../routes/Home';
+import RouteResults from '../routes/Results';
 
 const App = () => (
-	<div className="App">
-		<DistinguishedName dn={INPUT} />
-	</div>
+	<Router>
+		<div className="App">
+			<h1>LDAP</h1>
+			<Route exact={true} path="/" component={RouteHome} />
+			<Route path="/results" component={RouteResults} />
+		</div>
+	</Router>
 );
 
 export default App;
