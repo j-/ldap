@@ -24,6 +24,7 @@ export default class InputForm extends React.Component<Props, State> {
 						type="text"
 						value={dn}
 						onInput={this.handleInput}
+						autoFocus={true}
 					/>
 				</label><br />
 
