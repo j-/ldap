@@ -1,12 +1,14 @@
+// From https://tools.ietf.org/html/rfc4519#section-2
 export const TYPES = new Map([
-	['DC', 'Domain component'],
-	['CN', 'Common name'],
-	['OU', 'Organizational unit name'],
-	['O', 'Organization name'],
-	['STREET', 'Street address'],
-	['L', 'Locality name'],
-	['ST', 'State or province name'],
 	['C', 'Country name'],
+	['CN', 'Common name'],
+	['DC', 'Domain component'],
+	['L', 'Locality name'],
+	['O', 'Organization name'],
+	['OU', 'Organizational unit name'],
+	['SN', 'Surname'],
+	['ST', 'State or province name'],
+	['STREET', 'Street address'],
 	['UID', 'User ID'],
 ]);
 
