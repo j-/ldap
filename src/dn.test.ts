@@ -1,50 +1,65 @@
-import { parseDn } from './dn';
+import {
+	parseRdnValue,
+	parseRdn,
+	parseDn,
+} from './dn';
 
-it('handles an empty string', () => {
-	const result = parseDn('');
-	expect(result).toEqual([]);
+describe('parseRdnValue', () => {
+	it('handles an empty string', () => {
+		const result = parseRdnValue('');
+		expect(result).toEqual('');
+	});
+
+	it('handles escaped commas', () => {
+		const result = parseRdnValue('bar\\,baz');
+		expect(result).toEqual('bar,baz');
+	});
+
+	it('escapes hex characters', () => {
+		// From https://msdn.microsoft.com/en-us/library/aa366101(v=vs.85).aspx
+		const result = parseRdnValue('Before\\0DAfter');
+		expect(result).toEqual('Before\rAfter');
+	});
 });
 
-it('handles a single relative distinguished name', () => {
-	const result = parseDn('foo=bar');
-	expect(result).toEqual([
-		['foo', 'bar'],
-	]);
+describe('parseRdn', () => {
+	it('handles an empty string', () => {
+		const result = parseRdn('');
+		expect(result).toEqual([]);
+	});
+
+	it('throws an error when there is no =', () => {
+		expect(() => parseRdn('foobar')).toThrowError('Expected an attribute assignment, none found');
+	});
 });
 
-it('handles two relative distinguished names', () => {
-	const result = parseDn('foo=bar,baz=qux');
-	expect(result).toEqual([
-		['foo', 'bar'],
-		['baz', 'qux'],
-	]);
-});
+describe('parseRdn', () => {
+	it('handles an empty string', () => {
+		const result = parseDn('');
+		expect(result).toEqual([]);
+	});
 
-it('handles three relative distinguished names', () => {
-	const result = parseDn('foo=bar,baz=qux,hello=world');
-	expect(result).toEqual([
-		['foo', 'bar'],
-		['baz', 'qux'],
-		['hello', 'world'],
-	]);
-});
+	it('handles a single relative distinguished name', () => {
+		const result = parseDn('foo=bar');
+		expect(result).toEqual([
+			['foo', 'bar'],
+		]);
+	});
 
-it('handles escaped commas', () => {
-	const result = parseDn('foo=bar\\,baz,hello=world');
-	expect(result).toEqual([
-		['foo', 'bar,baz'],
-		['hello', 'world'],
-	]);
-});
+	it('handles two relative distinguished names', () => {
+		const result = parseDn('foo=bar,baz=qux');
+		expect(result).toEqual([
+			['foo', 'bar'],
+			['baz', 'qux'],
+		]);
+	});
 
-it('escapes hex characters', () => {
-	// From https://msdn.microsoft.com/en-us/library/aa366101(v=vs.85).aspx
-	const result = parseDn('CN=Before\\0DAfter,OU=Test,DC=North America,DC=Fabrikam,DC=COM');
-	expect(result).toEqual([
-		['CN', 'Before\rAfter'],
-		['OU', 'Test'],
-		['DC', 'North America'],
-		['DC', 'Fabrikam'],
-		['DC', 'COM'],
-	]);
+	it('handles three relative distinguished names', () => {
+		const result = parseDn('foo=bar,baz=qux,hello=world');
+		expect(result).toEqual([
+			['foo', 'bar'],
+			['baz', 'qux'],
+			['hello', 'world'],
+		]);
+	});
 });

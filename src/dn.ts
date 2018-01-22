@@ -9,7 +9,13 @@ export const parseRdnValue = (value: string): string => {
 };
 
 export const parseRdn = (rdn: string): string[] => {
+	if (!rdn) {
+		return [];
+	}
 	const [attribute, value] = rdn.split('=');
+	if (!value) {
+		throw new SyntaxError('Expected an attribute assignment, none found');
+	}
 	return [attribute, parseRdnValue(value)];
 };
 
