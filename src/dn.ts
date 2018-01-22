@@ -1,10 +1,10 @@
 export const parseRdnValue = (value: string): string => {
 	return value
-		.replace(/\\[0-9a-fA-F]{2}/g, (val) => {
-			return String.fromCharCode(
+		.replace(/\\[0-9a-fA-F]{2}/g, (val) => (
+			String.fromCharCode(
 				parseInt(val.substring(1), 16)
-			);
-		})
+			)
+		))
 		.replace(/\\/g, '');
 };
 
