@@ -19,9 +19,9 @@ export const getType = (type: string): string => (
 );
 
 export const isKnownType = (type: string): boolean => (
-	TYPES.has(getType(type))
+	TYPES.has(getType(type).toUpperCase())
 );
 
 export const getTypeLabel = (type: string): string | undefined => (
-	TYPES.get(getType(type))
+	TYPES.get(getType(type).toUpperCase())
 );
