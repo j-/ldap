@@ -32,9 +32,9 @@ describe('parseRdn', () => {
 		expect(() => parseRdn('foobar')).toThrowError('Expected an attribute assignment, none found');
 	});
 
-	it('correctly handles multiple =', () => {
-		const result = parseRdn('CN;lang=en=foobar');
-		expect(result).toEqual(['CN;lang=en', 'foobar']);
+	it('correctly handles attribute descriptions', () => {
+		const result = parseRdn('CN;lang-en=foobar');
+		expect(result).toEqual(['CN;lang-en', 'foobar']);
 	});
 });
 

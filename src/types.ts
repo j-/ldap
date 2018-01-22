@@ -14,14 +14,14 @@ export const TYPES = new Map([
 
 Object.freeze(TYPES);
 
-export const parseType = (type: string): string => (
-	type.trim().toUpperCase()
+export const getType = (type: string): string => (
+	type.trim().replace(/;.*/, '')
 );
 
 export const isKnownType = (type: string): boolean => (
-	TYPES.has(parseType(type))
+	TYPES.has(getType(type))
 );
 
 export const getTypeLabel = (type: string): string | undefined => (
-	TYPES.get(parseType(type))
+	TYPES.get(getType(type))
 );
