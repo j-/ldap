@@ -10,13 +10,18 @@ const getDN = (search: string) => {
 
 const RouteResults = ({ location }: RouteProps) => (
 	<div className="RouteResults">
-		<h2>Results</h2>
 		<br />
-		<DistinguishedName dn={getDN(location ? location.search : '')} />
+		<div className="pt-card">
+			<h2>Results</h2>
+			<br />
+			<DistinguishedName dn={getDN(location ? location.search : '')} />
+		</div>
 		<br />
-		<h2>Parse another distinguished name</h2>
-		<br />
-		<InputForm />
+		<div className="pt-card">
+			<h2>Parse another distinguished name</h2>
+			<br />
+			<InputForm />
+		</div>
 	</div>
 );
 

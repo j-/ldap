@@ -17,12 +17,22 @@ export default class InputForm extends React.Component<Props, State> {
 		const { dn } = this.state;
 		return (
 			<form className="InputForm" onSubmit={this.handleSubmit}>
-				<label>
+				<label className="pt-label">
 					Distinguished name<br />
-					<input type="text" value={dn} onInput={this.handleInput} />
+					<input
+						className="pt-input pt-intent-primary pt-large pt-fill"
+						type="text"
+						value={dn}
+						onInput={this.handleInput}
+					/>
 				</label><br />
 
-				<button type="submit">Parse</button>
+				<button
+					className="pt-button pt-intent-primary pt-large"
+					type="submit"
+				>
+					Parse
+				</button>
 			</form>
 		);
 	}
